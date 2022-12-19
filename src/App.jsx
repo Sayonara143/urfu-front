@@ -1,34 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import Router from './router';
+import './App.scss';
+import Toast from './components/toast/Toast';
+import './assets/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { sync } from './store/asyncAction/auth';
+// import 'moment/locale/ru';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.auth);
+  useEffect(() => {
+    dispatch(sync());
+  }, []);
+  if (isLoading) {
+    <div>Loading...</div>
+  }
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <>
+      <Toast />
+      <Router />
+    </>
+  );
 }
 
-export default App
+export default App;

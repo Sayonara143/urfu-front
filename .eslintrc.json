@@ -8,13 +8,16 @@
         "plugin:react/recommended",
         "prettier"
     ],
-    "overrides": [
-    ],
+
     "plugins": [
         "react",
         "react-hooks",
         "prettier"
     ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
     "rules": {
         "react/react-in-jsx-scope": "off",
         "camelcase": "error",
